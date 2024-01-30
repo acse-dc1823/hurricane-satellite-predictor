@@ -1,0 +1,19 @@
+name: acds_debi
+
+channels:
+  - conda-forge
+  - pytorch
+  - defaults
+
+dependencies:
+ - flake8
+ - jupyter
+ - pip
+ - pytest
+ - pytest-timeout
+ - python=3.11
+ - sphinx
+ - torch
+ - torchvision
+ - pip:
+   - -r requirements.txt
