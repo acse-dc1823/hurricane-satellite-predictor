@@ -8,3 +8,5 @@ jupyter
 flake8
 pytest
 branca
+sphinx
+sphinx_rtd_theme
