@@ -14,17 +14,23 @@ https://imperiallondon.sharepoint.com/:p:/r/sites/TrialTeam-EA/Shared%20Document
 
 Hurricanes can cause upwards of 1,000 deaths and $50 billion in damages in a single event and have been responsible for well over 160,000 deaths globally in recent history. During a tropical cyclone, humanitarian response efforts hinge on accurate risk approximation models that can help predict optimal emergency strategic decisions.
 
-Therefore, we are committed to building two deep learning models to address the following two tasks.
+Therefore, we are committed to building two deep-learning models to address the following two tasks.
 
-- Task 1: Generate a ML/DL-based sloution which is able to generate 3 future image prediction based on the given satellite images.
+- Task 1: Generate an ML/DL-based solution that can generate 3 future image predictions based on the given satellite images.
 - Task 2: Train a network to predict wind speeds based on the training data provided.
 
-### 2. Environment Setup Guide
+### 2. Documentation
+
+The detailed project explanation and function API can be found [here](https://ese-msc-2023.github.io/acds-the-day-after-tomorrow-debi/).
+
+This web page is automatically created by a Github action.
+
+### 3. Environment Setup Guide
 
 The main progress of this project can be explored using **notebook**:
 - `/notebooks/xxx.ipynb`
 
-In order to run these notebooks, follow these steps to download the `storm_predict` project and set up your environment:
+To run these notebooks, follow these steps to download the `storm_predict` project and set up your environment:
 
 1. clone this repository by running `git clone <url>` in your chosen directory.
 2. In the cloned directory, create a new virtual environment. For example, using `conda`, run the following in the terminal:
@@ -44,9 +50,9 @@ In order to run these notebooks, follow these steps to download the `storm_predi
     ...
     ```
 
-### 3. Project Structure
+### 4. Project Structure
 
-See module level docstrings for module details.
+See module-level docstrings for module details.
 
 
 ```
@@ -56,7 +62,7 @@ See module level docstrings for module details.
 │       └── image_generate_model.py
 │   ├── resources
 │       ** static data **
-│   ├── visulaisation
+│   ├── visualisation
 │       ├── analysis.py
 │       └── predict_visual.py
 │   ├── tests
@@ -72,14 +78,26 @@ See module level docstrings for module details.
 └── environment.yml
 ```
 
-### 4. Overall Performance
+### 5. Overall Performance
 
 To be updated.
 
-### 5. Future Improvements
+### 6. Future Improvements
 
 To be updated.
 
-### 6. Reference
+### 7. Team Contacts
 
-To be updated.
+For any problems of the project, please feel free to contact the team leader of the Bennu group.
+- **[David Colomer Matachana]** - Project Coordinator - [ediz.kula23@imperial.ac.uk]
+
+Here are the contact information of the other team members:
+- **[Jiangnan Meng]** - [jiangnan.meng23@imperial.ac.uk]
+- **[Rory Cornelius Smith]** - [rory.cornelius-smith23@imperial.ic.uk]
+- **[Iona Y Chadda]** - [iona.chadda23@imperial.ac.uk]
+- **[Tianzi Zhang]** - [tianzi.zhang23@imperial.ac.uk]
+- **[Alex N Njeumi]**  - [alex.njeumi23@imperial.ac.uk]
+- **[Yibin Gao]** - [yibin.gao23@imperial.ac.uk]
+- **[Zeyu Zhao]** - [zeyu.zhao23@imperial.ac.uk]
+
+We welcome your input and look forward to collaborating with the wider community!
