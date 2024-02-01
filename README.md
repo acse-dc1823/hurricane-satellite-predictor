@@ -80,16 +80,18 @@ See module-level docstrings for module details.
 
 ### 5. Overall Performance
 
-To be updated.
+Generated images contain added blurry noise...
+
+Generated windspeeds
 
 ### 6. Future Improvements
 
-To be updated.
+A tried implementation for the project was instead of training on specific image sequences, i.e. the methodology used for the final model, to train the image generation model using image difference and subsequent addition of the generated deltas to the final image in the sequence. Although theoretically strong in base, this was unable to outperform our final model, particularly on storms with significant storm development between images. With added development time...
 
 ### 7. Team Contacts
 
-For any problems of the project, please feel free to contact the team leader of the Bennu group.
-- **[David Colomer Matachana]** - Project Coordinator - [ediz.kula23@imperial.ac.uk]
+For any problems with the project, please feel free to contact the team leader of the Debi group.
+- **[David Colomer Matachana]** - Project Coordinator - [david.colomer-matachana23@imperial.ac.uk]
 
 Here are the contact information of the other team members:
 - **[Jiangnan Meng]** - [jiangnan.meng23@imperial.ac.uk]
