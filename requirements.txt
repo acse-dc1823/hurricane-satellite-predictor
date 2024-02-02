@@ -11,7 +11,7 @@ branca
 sphinx
 sphinx_rtd_theme
 imageio
-PIL
+pillow
 livelossplot
 torch
 torchvision
