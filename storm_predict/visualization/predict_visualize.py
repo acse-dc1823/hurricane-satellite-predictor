@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+_all_ = ["plot_wind_speed_difference"]
 
 
 def plot_wind_speed_difference(predicted_speeds, actual_speeds):

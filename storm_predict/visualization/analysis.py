@@ -3,6 +3,8 @@ import json
 import matplotlib.pyplot as plt
 from torchvision.transforms import ToPILImage
 from PIL import Image
+_all_ = ["show_speed_distribution", "show_one_image_per_storm",
+         "show_samples"]
 
 
 def show_speed_distribution(path):

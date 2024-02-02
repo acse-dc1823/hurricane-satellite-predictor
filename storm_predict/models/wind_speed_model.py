@@ -6,7 +6,9 @@ from PIL import Image
 from tqdm import tqdm
 from livelossplot import PlotLosses
 from ..visualization.predict_visualize import plot_wind_speed_difference
-
+_all_ = ["ConvNet", "train_model",
+         "predict", "load_wind_speed",
+         "show_difference", "predict_unknown"]
 
 class ConvNet(nn.Module):
     """
