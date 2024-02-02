@@ -42,9 +42,9 @@ To run these notebooks, follow these steps to download the `storm_predict` proje
     ...
     ```
 
-**N.B.** Please ensure that the dataset "Selected_Storms_curated" is located in the repo before utilising the workflow for additional training. This can be done in the local directory after cloning.
-
 ### 4. Project Structure
+
+**N.B.** Please ensure that the dataset "Selected_Storms_curated" is located in the repo before utilising the workflow for additional training. This can be done in the local directory after cloning.
 
 See module-level docstrings for module details.
 
