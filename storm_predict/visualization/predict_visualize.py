@@ -1,6 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
+
 def plot_wind_speed_difference(predicted_speeds, actual_speeds):
     """
     Plot the difference between predicted and actual wind speeds.
@@ -18,10 +19,11 @@ def plot_wind_speed_difference(predicted_speeds, actual_speeds):
     """
     # Calculate differences and difference percentages
     differences = np.array(predicted_speeds) - np.array(actual_speeds)
-    difference_percentages = np.abs(differences) / np.array(actual_speeds) * 100
+    difference_percentages = np.abs(differences) / \
+        np.array(actual_speeds) * 100
 
     rmse = np.sqrt(np.mean(np.square(differences)))
-    print('rmse:',rmse)
+    print('rmse:', rmse)
     # Plotting
     plt.figure(figsize=(16, 9))
     plt.subplot(2, 2, 1)
@@ -32,7 +34,8 @@ def plot_wind_speed_difference(predicted_speeds, actual_speeds):
     plt.legend()
 
     plt.subplot(2, 2, 3)
-    plt.plot(difference_percentages, label='Difference Percentages', color='green')
+    plt.plot(difference_percentages,
+             label='Difference Percentages', color='green')
     plt.xlabel('Sample Index')
     plt.ylabel('Difference Percentage (%)')
     plt.title('Difference Percentages Between Predicted and Actual Speeds')

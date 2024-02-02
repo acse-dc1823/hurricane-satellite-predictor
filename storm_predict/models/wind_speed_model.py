@@ -1,19 +1,12 @@
 import os
 import json
-import numpy as np
-import random
 import torch
 import torch.nn as nn
-import torch.optim as optim
-import torch.nn.functional as F
-from torch.utils.data import Dataset, ConcatDataset, DataLoader, Subset
-from torchvision.transforms import ToTensor
-from matplotlib import pyplot as plt
 from PIL import Image
-from torchvision import transforms, models
 from tqdm import tqdm
 from livelossplot import PlotLosses
 from ..visualization.predict_visualize import plot_wind_speed_difference
+
 
 class ConvNet(nn.Module):
     """
@@ -57,8 +50,10 @@ class ConvNet(nn.Module):
         x = self.conv_layer(x)
         x = self.linear_layer(x)
         return x
-    
-def train_model(model, device, train_loader, val_loader, criterion, optimizer, num_epochs=10, save_path='best_model.pth'):
+
+
+def train_model(model, device, train_loader, val_loader, criterion,
+                optimizer, num_epochs=10, save_path='best_model.pth'):
     """
     Train the given model.
 
@@ -91,7 +86,10 @@ def train_model(model, device, train_loader, val_loader, criterion, optimizer, n
     best_model = None
     for epoch in range(num_epochs):
         model.train()
-        train_iterator = tqdm(train_loader, desc=f'Epoch {epoch+1}/{num_epochs}', dynamic_ncols=True)
+        train_iterator = tqdm(
+            train_loader, desc=f'Epoch {epoch+1}/{num_epochs}',
+            dynamic_ncols=True
+            )
         train_loss = 0.0
         for inputs, labels in train_iterator:
             inputs, labels = inputs.to(device), labels.to(device)
@@ -101,7 +99,8 @@ def train_model(model, device, train_loader, val_loader, criterion, optimizer, n
             loss.backward()
             optimizer.step()
             train_loss += loss.item()
-            train_iterator.set_postfix({'Train Loss': loss.item()}, refresh=True)
+            train_iterator.set_postfix({'Train Loss': loss.item()},
+                                       refresh=True)
 
         # Evaluate the model on a validation set
         model.eval()
@@ -110,9 +109,10 @@ def train_model(model, device, train_loader, val_loader, criterion, optimizer, n
             for inputs, labels in val_loader:
                 inputs, labels = inputs.to(device), labels.to(device)
                 outputs = model(inputs)
-                val_loss += criterion(outputs, labels.unsqueeze(1).float()).item()
-        
-        train_loss /=len(train_loader)
+                val_loss += criterion(outputs,
+                                      labels.unsqueeze(1).float()).item()
+
+        train_loss /= len(train_loader)
         val_loss /= len(val_loader)
         liveplot.update({
             'loss': train_loss,
@@ -129,7 +129,8 @@ def train_model(model, device, train_loader, val_loader, criterion, optimizer, n
         print(f'Validation Loss: {val_loss}')
 
     return best_model
-    
+
+
 def predict(model, data_loader, device):
     """
     Predict wind speeds using the trained model.
@@ -155,10 +156,12 @@ def predict(model, data_loader, device):
         for inputs, _ in data_loader:
             inputs = inputs.to(device)
             outputs = model(inputs)
-            flattened_outputs = outputs.view(-1).cpu().numpy()  # Flattened and converted to numpy array
+            # Flattened and converted to numpy array
+            flattened_outputs = outputs.view(-1).cpu().numpy()
             predictions.extend(flattened_outputs)
 
     return predictions
+
 
 def load_wind_speed(json_path):
     """
@@ -177,7 +180,8 @@ def load_wind_speed(json_path):
     with open(json_path, 'r') as file:
         data = json.load(file)
         return float(data['wind_speed'])
-    
+
+
 def show_difference(unseen_path, model, predict_loader, device, start=-10):
     """
     Show the difference between predicted and actual wind speeds.
@@ -198,7 +202,8 @@ def show_difference(unseen_path, model, predict_loader, device, start=-10):
     actual_speeds = []
     predicted_speeds = predict(model, predict_loader, device)
 
-    json_path = [f for f in os.listdir(unseen_path) if f.endswith('_label.json')]
+    json_path = [f for f in os.listdir(unseen_path)
+                 if f.endswith('_label.json')]
     json_path.sort()
 
     # Loop through the folder
@@ -209,9 +214,12 @@ def show_difference(unseen_path, model, predict_loader, device, start=-10):
 
     plot_wind_speed_difference(predicted_speeds, actual_speeds)
 
-def predict_unknown(folder_path, model, device, predict_num=13, transformer=None):
+
+def predict_unknown(folder_path, model, device,
+                    predict_num=13, transformer=None):
     """
-    Predict wind speeds for unknown data in a folder and update corresponding JSON files.
+    Predict wind speeds for unknown data in a folder
+    and update corresponding JSON files.
 
     Parameters
     ----------
@@ -232,7 +240,8 @@ def predict_unknown(folder_path, model, device, predict_num=13, transformer=None
         List of predicted wind speeds.
     """
     # Get all the .jpg file names in the folder
-    img_files = [img for img in sorted(os.listdir(folder_path)) if img.endswith('.jpg')]
+    img_files = [img for img in sorted(os.listdir(folder_path))
+                 if img.endswith('.jpg')]
     # Generate corresponding .json file names
     json_files = [img.replace('.jpg', '_label.json') for img in img_files]
     # Number of pictures of known wind speeds
@@ -241,9 +250,12 @@ def predict_unknown(folder_path, model, device, predict_num=13, transformer=None
     result = []
 
     for i in range(predict_num):
-        img1 = Image.open(os.path.join(folder_path, img_files[i+k-2])).convert('L')
-        img2 = Image.open(os.path.join(folder_path, img_files[i+k-1])).convert('L')
-        img3 = Image.open(os.path.join(folder_path, img_files[i+k])).convert('L')
+        img1 = Image.open(os.path.join(folder_path,
+                                       img_files[i+k-2])).convert('L')
+        img2 = Image.open(os.path.join(folder_path,
+                                       img_files[i+k-1])).convert('L')
+        img3 = Image.open(os.path.join(folder_path,
+                                       img_files[i+k])).convert('L')
 
         # Image transformation
         img1 = transformer(img1)
@@ -270,5 +282,5 @@ def predict_unknown(folder_path, model, device, predict_num=13, transformer=None
         }
         with open(label3_path, 'w') as new_json:
             json.dump(new_data, new_json, indent=4)
-        
+
     return result
