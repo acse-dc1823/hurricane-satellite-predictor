@@ -1,14 +1,6 @@
-# The Day After Tomorrow
-
-### Link to the training dataset
-https://drive.google.com/drive/folders/1tFqoQl-sdK6qTY1vNWIoAdudEsG6Lirj?usp=drive_link
-
-### Link to the briefing slides
-https://imperiallondon.sharepoint.com/:p:/r/sites/TrialTeam-EA/Shared%20Documents/General/TheDayAfterTomorrow-presentation%202.pptx?d=wdf1d9e0210264eab88858e2353a36242&csf=1&web=1&e=XoU1Am
-
 ## Predicting tropical storm behaviour through Deep Learning
 
-**NOTE**: This project is currently a work-in-progress. If you spot any errors, please reach out.
+**NOTE**: This project is currently a work-in-progress. If you spot any errors, please reach out to the contributors or raise an issue.
 
 ### 1. Overview
 
@@ -23,7 +15,7 @@ Therefore, we are committed to building two deep-learning models to address the 
 
 The detailed project explanation and function API can be found [here](https://ese-msc-2023.github.io/acds-the-day-after-tomorrow-debi/).
 
-This web page is automatically created by a Github action.
+This web page is automatically updated by a Github action.
 
 ### 3. Environment Setup Guide
 
@@ -49,6 +41,8 @@ To run these notebooks, follow these steps to download the `storm_predict` proje
     pip        23.3
     ...
     ```
+
+**N.B.** Please ensure that the dataset "Selected_Storms_curated" is located in the repo before utilising the workflow for additional training. This can be done in the local directory after cloning.
 
 ### 4. Project Structure
 
@@ -86,16 +80,18 @@ Generated windspeeds
 
 ### 6. Future Improvements
 
-A tried implementation for the project was instead of training on specific image sequences, i.e. the methodology used for the final model, to train the image generation model using image difference and subsequent addition of the generated deltas to the final image in the sequence. Although theoretically strong in base, this was unable to outperform our final model, particularly on storms with significant storm development between images. With added development time...
+An attempted approach for the project involved training the image generation model using image differences and adding the generated deltas to the final image in the sequence, as opposed to the methodology used for the final model, which focused on training specific image sequences. While this alternative method had a strong theoretical base, it ultimately failed to surpass the performance of our final model, especially in cases involving storms with substantial development between images. **As shown below** for the final test case, storm translation (left to right) was inconsistent with expectations. Furthermore, graininess and slightly reduced image resolution in comparison with the final model were a factor in the decision against using this model. It is noted that when feeding the generated images from the final model as well as the deltas, there was low variation in predicted windspeeds, indicating not only a robust CNN for the wind prediction but also a low perceived pixel variation between both generation models. With additional development time...
+
+Included in the repository are some extra experimental models namely, a ConvLSTM with time encoding included. With added development time, code reviewing, testing and packaging, the accuracy of the model would be able to be ratified. **As seen below** image sequence generation from this model performed with higher image resolution and combining this into the wind prediction CNN model may be able to produce more accurate results. It is noted, however, that this model produces less perceived rotation and considering the final stage of the surprise storm, this is an important factor.
 
 ### 7. Team Contacts
 
-For any problems with the project, please feel free to contact the team leader of the Debi group.
+If you have any problems with the project, please feel free to contact the team leader of the Debi group.
 - **[David Colomer Matachana]** - Project Coordinator - [david.colomer-matachana23@imperial.ac.uk]
 
 Here are the contact information of the other team members:
 - **[Jiangnan Meng]** - [jiangnan.meng23@imperial.ac.uk]
-- **[Rory Cornelius Smith]** - [rory.cornelius-smith23@imperial.ic.uk]
+- **[Rory Cornelius Smith]** - [rory.cornelius-smith23@imperial.ac.uk]
 - **[Iona Y Chadda]** - [iona.chadda23@imperial.ac.uk]
 - **[Tianzi Zhang]** - [tianzi.zhang23@imperial.ac.uk]
 - **[Alex N Njeumi]**  - [alex.njeumi23@imperial.ac.uk]
