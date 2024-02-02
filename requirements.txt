@@ -15,4 +15,3 @@ pillow
 livelossplot
 torch
 torchvision
-subprocess
