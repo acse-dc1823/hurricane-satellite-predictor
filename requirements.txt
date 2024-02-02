@@ -10,7 +10,7 @@ pytest
 branca
 sphinx
 sphinx_rtd_theme
-imagio
+imageio
 PIL
 livelossplot
 torch
