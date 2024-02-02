@@ -11,13 +11,12 @@ dependencies:
  - pip
  - pytest
  - pytest-timeout
- - python=3.11
+ - python=3.10
  - sphinx
  - torch
  - torchvision
  - livelossplot
- - subprocess
- - PIL
+ - pillow
  - imageio
  - pip:
    - -r requirements.txt
