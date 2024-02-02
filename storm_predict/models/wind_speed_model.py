@@ -16,6 +16,13 @@ from livelossplot import PlotLosses
 from ..visualization.predict_visualize import plot_wind_speed_difference
 
 class ConvNet(nn.Module):
+    """
+    Convolutional Neural Network for wind speed prediction.
+
+    Attributes:
+        conv_layer (nn.Sequential): Convolutional layers.
+        linear_layer (nn.Sequential): Linear layers for final prediction.
+    """
     def __init__(self):
         super(ConvNet, self).__init__()
         self.conv_layer = nn.Sequential(
@@ -34,11 +41,51 @@ class ConvNet(nn.Module):
         )
 
     def forward(self, x):
+        """
+        Forward pass of the ConvNet.
+
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input data.
+
+        Returns
+        -------
+        torch.Tensor
+            Model predictions.
+        """
         x = self.conv_layer(x)
         x = self.linear_layer(x)
         return x
     
 def train_model(model, device, train_loader, val_loader, criterion, optimizer, num_epochs=10, save_path='best_model.pth'):
+    """
+    Train the given model.
+
+    Parameters
+    ----------
+    model : nn.Module
+        Model to be trained.
+    device : torch.device
+        Device to perform training on.
+    train_loader : DataLoader
+        DataLoader for the training dataset.
+    val_loader : DataLoader
+        DataLoader for the validation dataset.
+    criterion : torch.nn.modules.loss._Loss
+        Loss function.
+    optimizer : torch.optim.Optimizer
+        Optimizer for model training.
+    num_epochs : int, optional
+        Number of training epochs. Default is 10.
+    save_path : str, optional
+        Path to save the best model. Default is 'best_model.pth'.
+
+    Returns
+    -------
+    nn.Module
+        Best-trained model.
+    """
     liveplot = PlotLosses()
     best_val_loss = -1
     best_model = None
@@ -84,6 +131,23 @@ def train_model(model, device, train_loader, val_loader, criterion, optimizer, n
     return best_model
     
 def predict(model, data_loader, device):
+    """
+    Predict wind speeds using the trained model.
+
+    Parameters
+    ----------
+    model : nn.Module
+        Trained model for wind speed prediction.
+    data_loader : DataLoader
+        DataLoader for input data.
+    device : torch.device
+        Device to perform predictions on.
+
+    Returns
+    -------
+    list
+        List of predicted wind speeds.
+    """
     model.eval()  # Set the model to evaluation mode
     predictions = []
 
@@ -97,11 +161,40 @@ def predict(model, data_loader, device):
     return predictions
 
 def load_wind_speed(json_path):
+    """
+    Load wind speed from a JSON file.
+
+    Parameters
+    ----------
+    json_path : str
+        Path to the JSON file containing wind speed information.
+
+    Returns
+    -------
+    float
+        Wind speed value.
+    """
     with open(json_path, 'r') as file:
         data = json.load(file)
         return float(data['wind_speed'])
     
 def show_difference(unseen_path, model, predict_loader, device, start=-10):
+    """
+    Show the difference between predicted and actual wind speeds.
+
+    Parameters
+    ----------
+    unseen_path : str
+        Path to the folder containing unseen data.
+    model : nn.Module
+        Trained model for wind speed prediction.
+    predict_loader : DataLoader
+        DataLoader for prediction data.
+    device : torch.device
+        Device to perform predictions on.
+    start : int, optional
+        Starting index for visualization. Default is -10.
+    """
     actual_speeds = []
     predicted_speeds = predict(model, predict_loader, device)
 
@@ -117,6 +210,27 @@ def show_difference(unseen_path, model, predict_loader, device, start=-10):
     plot_wind_speed_difference(predicted_speeds, actual_speeds)
 
 def predict_unknown(folder_path, model, device, predict_num=13, transformer=None):
+    """
+    Predict wind speeds for unknown data in a folder and update corresponding JSON files.
+
+    Parameters
+    ----------
+    folder_path : str
+        Path to the folder containing images and JSON files.
+    model : nn.Module
+        Trained model for wind speed prediction.
+    device : torch.device
+        Device to perform predictions on.
+    predict_num : int, optional
+        Number of predictions to make. Default is 13.
+    transformer : torchvision.transforms.Transform, optional
+        Image transformation. Default is None.
+
+    Returns
+    -------
+    list
+        List of predicted wind speeds.
+    """
     # Get all the .jpg file names in the folder
     img_files = [img for img in sorted(os.listdir(folder_path)) if img.endswith('.jpg')]
     # Generate corresponding .json file names

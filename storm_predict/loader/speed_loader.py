@@ -15,15 +15,66 @@ from tqdm import tqdm
 from livelossplot import PlotLosses
 
 class StormDataset(Dataset):
+    """
+    Dataset class for loading storm images and wind speed labels.
+
+    Parameters
+    ----------
+    root_dir : str
+        Path to the root directory containing images and labels.
+    start_idx : int, optional
+        Starting index for data selection (default is 0).
+    end_idx : int, optional
+        Ending index for data selection (default is None).
+    transform : callable, optional
+        Optional transform to be applied to images.
+
+    Attributes
+    ----------
+    root_dir : str
+        Path to the root directory containing images and labels.
+    transform : callable, optional
+        Optional transform to be applied to images.
+    data_path : list
+        List of sorted image file names in the specified range.
+
+    Methods
+    -------
+    __len__()
+        Returns the length of the dataset.
+    __getitem__(idx)
+        Retrieves and returns a sample from the dataset.
+    """
     def __init__(self, root_dir, start_idx=0, end_idx=None, transform=None):
         self.root_dir = root_dir
         self.transform = transform
         self.data_path = sorted([file for file in os.listdir(root_dir) if file.endswith('.jpg')])[start_idx:end_idx]
 
     def __len__(self):
+        """
+        Returns the length of the dataset.
+
+        Returns
+        -------
+        int
+            Length of the dataset.
+        """
         return len(self.data_path) - 2
 
     def __getitem__(self, idx):
+        """
+        Retrieves and returns a sample from the dataset.
+
+        Parameters
+        ----------
+        idx : int
+            Index of the sample.
+
+        Returns
+        -------
+        tuple
+            Tuple containing the stacked image and the target wind speed.
+        """
         img1 = Image.open(os.path.join(self.root_dir, self.data_path[idx])).convert('L')
         img2 = Image.open(os.path.join(self.root_dir, self.data_path[idx+1])).convert('L')
         img3 = Image.open(os.path.join(self.root_dir, self.data_path[idx+2])).convert('L')
@@ -50,6 +101,23 @@ class StormDataset(Dataset):
         return stacked_img, target
     
 def get_train_val_loader(dataset, train_size=0.8):
+    """
+    Split the dataset into training and validation sets and create DataLoader instances.
+
+    Parameters
+    ----------
+    dataset : Dataset
+        Dataset to be split.
+    train_size : float, optional
+        Fraction of the dataset to be used for training (default is 0.8).
+
+    Returns
+    -------
+    DataLoader
+        DataLoader for the training set.
+    DataLoader
+        DataLoader for the validation set.
+    """
     # Split train set and validation set
     train_size = int(train_size * len(dataset))
     val_size = len(dataset) - train_size

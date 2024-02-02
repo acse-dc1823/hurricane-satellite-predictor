@@ -2,6 +2,20 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 def plot_wind_speed_difference(predicted_speeds, actual_speeds):
+    """
+    Plot the difference between predicted and actual wind speeds.
+
+    Parameters
+    ----------
+    predicted_speeds : list
+        List of predicted wind speeds.
+    actual_speeds : list
+        List of actual wind speeds.
+
+    Returns
+    -------
+    None
+    """
     # Calculate differences and difference percentages
     differences = np.array(predicted_speeds) - np.array(actual_speeds)
     difference_percentages = np.abs(differences) / np.array(actual_speeds) * 100
