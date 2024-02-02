@@ -10,3 +10,9 @@ pytest
 branca
 sphinx
 sphinx_rtd_theme
+imagio
+PIL
+livelossplot
+torch
+torchvision
+subprocess
