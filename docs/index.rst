@@ -40,33 +40,31 @@ Usage of AI Tools
 ChatGPT generated docstrings for most functions, however, these were ratified with common sense
 in coding review.
 
-We utilized ChatGPT for some parts of XXX but again this was used primarily for _playing_ with ideas
+We utilized ChatGPT for some parts of XXX but again this was used primarily for "playing" with ideas
 and getting baseline implementations to build upon, ultimately we didn't directly use the answers,
 we modified a lot as this was almost always necessary.
 
-We learned a sphinx theme online and used it for documentation.
-
-See all the reference links below.
+We used a sphinx theme "read-the-docs" for documentation.
 
 
 References
 ==========
 
 [1] Image Generation:
-            <1> `(Patient Subtyping via Time-Aware LSTM Networks)<https://dl.acm.org/doi/pdf/10.1145/3097983.3097997>`
+            <1> `Patient Subtyping via Time-Aware LSTM Networks: https://dl.acm.org/doi/pdf/10.1145/3097983.3097997`
 
-            <2> `(Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting)<https://arxiv.org/pdf/1506.04214.pdf>`
+            <2> `Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting: https://arxiv.org/pdf/1506.04214.pdf`
 
-            <3> 
+            <3> `Andrea Palazzi (ndrplz) - ConvLSTM_pytorch, MIT Licensed: https://github.com/ndrplz/ConvLSTM_pytorch/blob/master/convlstm.py`
 
             <4> 
 
             <5> 
 
 [2] Wind Speed Prediction: 
-            <1> 
+            <1> `Tropical cyclones and climate change: https://www.nature.com/articles/ngeo779%22%22`
 
-            <2> 
+            <2> `Use Keras and OpenCV to predict age, gender and emotion in real-time: https://cloud.tencent.com/developer/article/2011061`
 
             <3> 
 
@@ -75,7 +73,7 @@ References
             <5> 
 
 [3] Miscellaneous:
-            <1> 
+            <1> `Sphinx Document theme RTD: https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html`
 
             <2> 
 
