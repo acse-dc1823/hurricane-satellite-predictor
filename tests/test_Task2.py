@@ -1,7 +1,6 @@
 import matplotlib
 import torch
 from torchvision import transforms
-from pytest import fixture
 from torch.utils.data import DataLoader
 import os
 import json
@@ -89,7 +88,6 @@ def test_predict():
 
     for speed in predictions:
         assert isinstance(speed, np.float32)
-
 
 
 def test_wind_speed_loader():
