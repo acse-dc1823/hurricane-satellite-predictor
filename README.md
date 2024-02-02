@@ -44,7 +44,7 @@ To run these notebooks, follow these steps to download the `storm_predict` proje
 
 ### 4. Project Structure
 
-**N.B.** Please ensure that the dataset "Selected_Storms_curated" is located in the repo before utilising the workflow for additional training. This can be done in the local directory after cloning.
+**N.B.** Please ensure that the dataset "Selected_Storms_curated" is located in the repo before utilising the workflow for additional training. This can be done in the local directory after cloning. The total dataset has not been uploaded to GitHub to avoid cloning time.
 
 See module-level docstrings for module details.
 
@@ -72,19 +72,19 @@ See module-level docstrings for module details.
 └── environment.yml
 ```
 
-### 5. Overall Performance
+### 5. Future Improvements
 
-Generated images contain added blurry noise...
+An attempted approach for the project involved training the image generation model using image differences and adding the generated deltas to the final image in the sequence, as opposed to the methodology used for the final model, which focused on training specific image sequences. While this alternative method had a strong theoretical base, it ultimately failed to surpass the performance of our final model, especially in cases involving storms with substantial development between images. **As shown below** for the final test case, storm translation (left to right) was inconsistent with expectations. Furthermore, graininess and slightly reduced image resolution in comparison with the final model were a factor in the decision against using this model. It is noted that when feeding the generated images from the final model as well as the deltas, there was low variation in predicted windspeeds, indicating not only a robust CNN for the wind prediction but also a low perceived pixel variation between both generation models. With additional development time.
 
-Generated windspeeds
+![WhatsApp Image 2024-02-02 at 14 27 02_502579aa](https://github.com/ese-msc-2023/acds-the-day-after-tomorrow-debi/assets/142494937/b6c11dd2-4693-455d-a597-c92ce73ad5ff)
 
-### 6. Future Improvements
-
-An attempted approach for the project involved training the image generation model using image differences and adding the generated deltas to the final image in the sequence, as opposed to the methodology used for the final model, which focused on training specific image sequences. While this alternative method had a strong theoretical base, it ultimately failed to surpass the performance of our final model, especially in cases involving storms with substantial development between images. **As shown below** for the final test case, storm translation (left to right) was inconsistent with expectations. Furthermore, graininess and slightly reduced image resolution in comparison with the final model were a factor in the decision against using this model. It is noted that when feeding the generated images from the final model as well as the deltas, there was low variation in predicted windspeeds, indicating not only a robust CNN for the wind prediction but also a low perceived pixel variation between both generation models. With additional development time...
 
 Included in the repository are some extra experimental models namely, a ConvLSTM with time encoding included. With added development time, code reviewing, testing and packaging, the accuracy of the model would be able to be ratified. **As seen below** image sequence generation from this model performed with higher image resolution and combining this into the wind prediction CNN model may be able to produce more accurate results. It is noted, however, that this model produces less perceived rotation and considering the final stage of the surprise storm, this is an important factor.
 
-### 7. Team Contacts
+![WhatsApp Image 2024-02-02 at 14 30 19_e4c92027](https://github.com/ese-msc-2023/acds-the-day-after-tomorrow-debi/assets/142494937/745f7eee-81dd-44ce-894b-28804db147ab)
+
+
+### 6. Team Contacts
 
 If you have any problems with the project, please feel free to contact the team leader of the Debi group.
 - **[David Colomer Matachana]** - Project Coordinator - [david.colomer-matachana23@imperial.ac.uk]
