@@ -15,5 +15,9 @@ dependencies:
  - sphinx
  - torch
  - torchvision
+ - livelossplot
+ - subprocess
+ - PIL
+ - imageio
  - pip:
    - -r requirements.txt
