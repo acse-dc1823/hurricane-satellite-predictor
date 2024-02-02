@@ -18,5 +18,6 @@ dependencies:
  - livelossplot
  - pillow
  - imageio
+ - tqdm
  - pip:
    - -r requirements.txt
