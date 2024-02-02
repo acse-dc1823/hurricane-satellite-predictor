@@ -24,3 +24,4 @@ jobs:
       - name: Run tests
         run: |
           python -m pytest --doctest-modules storm_predict
+          pytest tests/
