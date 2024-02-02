@@ -50,26 +50,49 @@ See module-level docstrings for module details.
 
 
 ```
-├── storm_predict
-│   ├── models
-│       ├── wind_speed_model.py
-│       └── image_generate_model.py
-│   ├── resources
-│       ** static data **
-│   ├── visualisation
-│       ├── analysis.py
-│       └── predict_visual.py
-│   ├── tests
-│       ├── __init__.py
-│       ├── test_geo.py
-│       └── test_tool.py
-│   ├── notebooks
-│       ├── read_data.ipynb
-│       └── result.ipynb
-│   └── tools    
-│       └── tool.py
+├── Extra
+│   ├── Task1-deltas-tst.ipynb
+│   └── Task1_model3.ipynb
+├── LICENSE
+├── README.md
+├── debi_windpredictions.csv
+├── docs
+│   ├── conf.py
+│   └── index.rst
+├── environment.yml
+├── gifs_results_different_models
+│   ├── output-deltas.gif
+│   ├── output-direct-comparison.gif
+│   └── output-model-3.gif
+├── notebooks
+│   ├── EDA notebook.ipynb
+│   ├── Task1.ipynb
+│   ├── Task2.ipynb
+│   └── surprise_storm.ipynb
 ├── requirements.txt
-└── environment.yml
+├── storm_predict
+│   ├── loader
+│   │   ├── __pycache__
+│   │   │   └── speed_loader.cpython-39.pyc
+│   │   └── speed_loader.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   └── wind_speed_model.cpython-39.pyc
+│   │   ├── image_generate_model.py
+│   │   └── wind_speed_model.py
+│   ├── resources
+│   │   └── data.txt
+│   ├── tests
+│   │   └── test.py
+│   └── visualization
+│       ├── __pycache__
+│       │   └── predict_visualize.cpython-39.pyc
+│       ├── analysis.py
+│       └── predict_visualize.py
+└── tests
+    ├── test_Task1.py
+    └── test_Task2.py
 ```
 
 ### 5. Future Improvements
