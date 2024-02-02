@@ -63,31 +63,13 @@ References
 
             <3> `Andrea Palazzi (ndrplz) - ConvLSTM_pytorch, MIT Licensed. <https://github.com/ndrplz/ConvLSTM_pytorch/blob/master/convlstm.py>`_
 
-            <4> 
-
-            <5> 
-
 [2] Wind Speed Prediction: 
             <1> `TKnutson, T., McBride, J., Chan, J. et al. Tropical cyclones and climate change. <https://www.nature.com/articles/ngeo779%22%22>`_
 
             <2> `Use Keras and OpenCV to predict age, gender and emotion in real-time. <https://cloud.tencent.com/developer/article/2011061>`_
 
-            <3> 
-
-            <4> 
-
-            <5> 
-
 [3] Miscellaneous:
             <1> `Sphinx Document theme RTD. <https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html>`_
-
-            <2> 
-
-            <3> 
-
-            <4> 
-
-            <5> 
 
 
 Image Generation Function API
