@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 2: The Day After Tomorrow &mdash; Day After Tomorrow  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            Day After Tomorrow
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Project 2: The Day After Tomorrow</a></li>
+<li><a class="reference internal" href="#synopsis">Synopsis</a></li>
+<li><a class="reference internal" href="#problem-definition">Problem Definition</a></li>
+<li><a class="reference internal" href="#user-guide">User Guide</a></li>
+<li><a class="reference internal" href="#usage-of-ai-tools">Usage of AI Tools</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+<li><a class="reference internal" href="#module-image_generate_model">Image Generation Function API</a><ul>
+<li><a class="reference internal" href="#image_generate_model.ConvLSTMModel"><code class="docutils literal notranslate"><span class="pre">ConvLSTMModel</span></code></a><ul>
+<li><a class="reference internal" href="#image_generate_model.ConvLSTMModel.forward"><code class="docutils literal notranslate"><span class="pre">ConvLSTMModel.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image_generate_model.Dataset"><code class="docutils literal notranslate"><span class="pre">Dataset</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.ImageSequenceDataset"><code class="docutils literal notranslate"><span class="pre">ImageSequenceDataset</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.ImageSequenceDatasetDelta"><code class="docutils literal notranslate"><span class="pre">ImageSequenceDatasetDelta</span></code></a><ul>
+<li><a class="reference internal" href="#image_generate_model.ImageSequenceDatasetDelta.filenames"><code class="docutils literal notranslate"><span class="pre">ImageSequenceDatasetDelta.filenames</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses"><code class="docutils literal notranslate"><span class="pre">PlotLosses</span></code></a><ul>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.draw"><code class="docutils literal notranslate"><span class="pre">PlotLosses.draw()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.reset_outputs"><code class="docutils literal notranslate"><span class="pre">PlotLosses.reset_outputs()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.send"><code class="docutils literal notranslate"><span class="pre">PlotLosses.send()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_bokeh"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_bokeh()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_extrema_printer"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_extrema_printer()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_matplotlib"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_matplotlib()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_neptune"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_neptune()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_tensorboard"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_tensorboard()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.to_tensorboard_tf"><code class="docutils literal notranslate"><span class="pre">PlotLosses.to_tensorboard_tf()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.PlotLosses.update"><code class="docutils literal notranslate"><span class="pre">PlotLosses.update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image_generate_model.StepLR"><code class="docutils literal notranslate"><span class="pre">StepLR</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.WeightedMSELoss"><code class="docutils literal notranslate"><span class="pre">WeightedMSELoss</span></code></a><ul>
+<li><a class="reference internal" href="#image_generate_model.WeightedMSELoss.forward"><code class="docutils literal notranslate"><span class="pre">WeightedMSELoss.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image_generate_model.train"><code class="docutils literal notranslate"><span class="pre">train()</span></code></a></li>
+<li><a class="reference internal" href="#image_generate_model.train_epoch"><code class="docutils literal notranslate"><span class="pre">train_epoch()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wind-prediction-function-api">Wind Prediction Function API</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Day After Tomorrow</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Project 2: The Day After Tomorrow</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="project-2-the-day-after-tomorrow">
+<h1>Project 2: The Day After Tomorrow<a class="headerlink" href="#project-2-the-day-after-tomorrow" title="Link to this heading"></a></h1>
+</section>
+<section id="synopsis">
+<h1>Synopsis<a class="headerlink" href="#synopsis" title="Link to this heading"></a></h1>
+<p>“The Day After Tomorrow” challenge is a mock exercise designed to enhance
+emergency protocols under hurricane threats. It simulates a scenario where
+FEMA (Federal Emergency Management Agency) in the US has opened a competition
+for teams of ML specialists to forecast the evolution of tropical cyclones
+in real time. The challenge involves developing solutions to accurately predict
+hurricane trajectories and impacts using advanced machine learning techniques.</p>
+</section>
+<section id="problem-definition">
+<h1>Problem Definition<a class="headerlink" href="#problem-definition" title="Link to this heading"></a></h1>
+<p>The problem posed in this challenge is significant and urgent, considering
+the devastating impact of hurricanes. Hurricanes can cause massive damage,
+including loss of lives and property. The project aims to leverage machine
+learning in developing predictive models that can accurately forecast the
+trajectory and intensity of tropical cyclones. This initiative seeks to
+improve emergency response and preparedness, ultimately saving lives and
+reducing economic losses.</p>
+<p>The project specifically addresses two topics through leveraging deep learning namely,
+storm sequence image prediction to gain visual representations of storm evolution
+based upon prior images of storms at relative times and generation of wind speed predictions
+based upon these generated images.</p>
+</section>
+<section id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
+<p>A full model pipeline for image generation of the next 3 storm evolutions for a new storm,
+alongside wind prediction from these generated images is included in the repo under notebooks <a class="reference external" href="https://github.com/ese-msc-2023/acds-the-day-after-tomorrow-debi/tree/main/notebooks">here</a>.</p>
+<p>Please utilise this notebook alongside all comments and markdown text in the notebooks as a user
+reference.</p>
+</section>
+<section id="usage-of-ai-tools">
+<h1>Usage of AI Tools<a class="headerlink" href="#usage-of-ai-tools" title="Link to this heading"></a></h1>
+<p>ChatGPT generated docstrings for most functions, however, these were ratified with common sense
+in coding review.</p>
+<p>We utilized ChatGPT  for parts of the image generation process as well as the image-to-wind prediction,
+but again this was used primarily for “playing” with ideas getting baseline implementations to build
+upon, ultimately we didn’t directly use the answers, we modified a lot as this was almost always necessary
+to return functioning code for the required use case.</p>
+<p>We used a sphinx theme “read-the-docs” for documentation.</p>
+</section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading"></a></h1>
+<dl>
+<dt>[1] Image Generation:</dt><dd><p>&lt;1&gt; <a class="reference external" href="https://dl.acm.org/doi/pdf/10.1145/3097983.3097997">Patient Subtyping via Time-Aware LSTM Networks.</a></p>
+<p>&lt;2&gt; <a class="reference external" href="https://arxiv.org/pdf/1506.04214.pdf">Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting.</a></p>
+<p>&lt;3&gt; <a class="reference external" href="https://github.com/ndrplz/ConvLSTM_pytorch/blob/master/convlstm.py">Andrea Palazzi (ndrplz) - ConvLSTM_pytorch, MIT Licensed.</a></p>
+</dd>
+<dt>[2] Wind Speed Prediction:</dt><dd><p>&lt;1&gt; <a class="reference external" href="https://www.nature.com/articles/ngeo779%22%22">TKnutson, T., McBride, J., Chan, J. et al. Tropical cyclones and climate change.</a></p>
+<p>&lt;2&gt; <a class="reference external" href="https://cloud.tencent.com/developer/article/2011061">Use Keras and OpenCV to predict age, gender and emotion in real-time.</a></p>
+</dd>
+<dt>[3] Miscellaneous:</dt><dd><p>&lt;1&gt; <a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/en/stable/index.html">Sphinx Document theme RTD.</a></p>
+</dd>
+</dl>
+</section>
+<section id="module-image_generate_model">
+<span id="image-generation-function-api"></span><h1>Image Generation Function API<a class="headerlink" href="#module-image_generate_model" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.ConvLSTMModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">ConvLSTMModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prediction_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.ConvLSTMModel" title="Link to this definition"></a></dt>
+<dd><p>A convolutional LSTM model that combines convolutional layers
+and an LSTM layer for processing sequential image data.</p>
+<p>The model consists of a series of convolutional layers followed by an
+LSTM layer and a fully connected layer. The convolutional layers extract
+spatial features from each frame in the sequence, while the LSTM layer
+captures temporal dependencies between the frames.
+The output of the LSTM layer is then passed through a fully connected
+layer to generate predictions of image shape for each sequence.</p>
+<section id="attributes">
+<h2>Attributes:<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>conv_layers (nn.Sequential): Convolutional layers for feature extraction</dt><dd><p>from images.</p>
+</dd>
+<dt>lstm (nn.LSTM): LSTM layer for capturing temporal relationships between</dt><dd><p>features extracted by convolutional layers.</p>
+</dd>
+<dt>fc (nn.Linear): Fully connected layer for mapping LSTM outputs</dt><dd><p>to the desired prediction shape.</p>
+</dd>
+</dl>
+<p>prediction_shape (tuple): Shape of the output predictions.</p>
+</section>
+<section id="args">
+<h2>Args:<a class="headerlink" href="#args" title="Link to this heading"></a></h2>
+<p>prediction_shape (tuple): The shape of the output predictions.
+This should include dimensions for batch size, sequence length,
+and any spatial dimensions of the output.</p>
+<p>The input to the model should be a 5D tensor with dimensions
+[batch size, sequence length, channels, height, width].</p>
+<p>Initialize internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.ConvLSTMModel.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.ConvLSTMModel.forward" title="Link to this definition"></a></dt>
+<dd><p>Forward pass of the ConvLSTMModel.</p>
+<section id="id1">
+<h3>Args:<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>x (Tensor): Input tensor of shape [batch size, sequence length,
+channels, height, width],representing a batch of image sequences.</p>
+</section>
+<section id="returns">
+<h3>Returns:<a class="headerlink" href="#returns" title="Link to this heading"></a></h3>
+<p>Tensor: The model’s predictions, reshaped to the
+specified prediction shape.</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><a class="headerlink" href="#image_generate_model.Dataset" title="Link to this definition"></a></dt>
+<dd><p>An abstract class representing a <a class="reference internal" href="#image_generate_model.Dataset" title="image_generate_model.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
+<p>All datasets that represent a map from keys to data samples should subclass
+it. All subclasses should overwrite <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>, supporting fetching a
+data sample for a given key. Subclasses could also optionally overwrite
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code>, which is expected to return the size of the dataset by many
+<code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code> implementations and the default options
+of <code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code>. Subclasses could also
+optionally implement <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitems__()</span></code>, for speedup batched samples
+loading. This method accepts list of indices of samples of batch and returns
+list of samples.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataLoader</span></code> by default constructs an index
+sampler that yields integral indices.  To make it work with a map-style
+dataset with non-integral indices/keys, a custom sampler must be provided.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.ImageSequenceDataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">ImageSequenceDataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.ImageSequenceDataset" title="Link to this definition"></a></dt>
+<dd><p>A PyTorch dataset class for loading sequences of images for time series
+prediction tasks,such as forecasting future frames. This dataset provides
+sequences of images (X) and their corresponding future images (y) based
+on specified window and prediction sizes. Each item in the dataset is
+a tuple (X, y), where X is the sequence of ‘window_size - prediction_size’
+input images and y is the sequence of ‘prediction_size’ future images that
+follow X.</p>
+<section id="parameters">
+<h2>Parameters:<a class="headerlink" href="#parameters" title="Link to this heading"></a></h2>
+<p>directory (str): The path to the directory containing the image files.
+transform (callable, optional): An optional transform to be applied on</p>
+<blockquote>
+<div><p>each image.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>window_size (int): The total number of images in each sequence,</dt><dd><p>including both input and prediction frames.</p>
+</dd>
+</dl>
+<p>prediction_size (int): The number of future images to predict at
+the end of each sequence.
+filename(str): the filename of images
+num_sequences(int): the length of sequences
+inference(bool): flag to indicate whether we are in inference phase or not.
+If yes, it will set the X sequence to the end of the dataset.</p>
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.ImageSequenceDatasetDelta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">ImageSequenceDatasetDelta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.ImageSequenceDatasetDelta" title="Link to this definition"></a></dt>
+<dd><p>A dataset class for loading and transforming sequences of image data
+intended for use in predicting future states of a sequence.</p>
+<p>The dataset generates pairs of image sequences (X)
+and target delta sequences (y).
+Each sequence X consists of ‘window_size’ consecutive images,
+and the corresponding
+target y is the sequence of ‘prediction_size’ delta images
+calculated as the pixel-wise difference from the last image
+in X to the subsequent images.</p>
+<section id="id2">
+<h2>Parameters:<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>directory (str): Directory path containing the image files.
+transform (callable, optional): Optional transform to be applied</p>
+<blockquote>
+<div><p>on each image.</p>
+</div></blockquote>
+<p>window_size (int): Number of images in each sequence of X.
+prediction_size (int): Number of delta images to predict for each sequence.</p>
+</section>
+<section id="id3">
+<h2>Returns:<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>Tuple of Tensors: (X, y) where X is a tensor of input deltas with shape
+(window_size - 1 - prediction_size, height, width) and y is a tensor of
+target
+deltas with shape (prediction_size, height, width).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="image_generate_model.ImageSequenceDatasetDelta.filenames">
+<span class="sig-name descname"><span class="pre">filenames</span></span><a class="headerlink" href="#image_generate_model.ImageSequenceDatasetDelta.filenames" title="Link to this definition"></a></dt>
+<dd><p>Total number of sequences that can be generated
+given the window and prediction sizes</p>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">PlotLosses</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><span class="pre">BO</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['MatplotlibPlot',</span> <span class="pre">'ExtremaPrinter']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'notebook'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.PlotLosses" title="Link to this definition"></a></dt>
+<dd><p>Class collect metrics from the training engine and send it to plugins, when send is called</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>outputs</strong> – list of output modules: objects inheriting from BaseOutput
+or strings for livelossplot built-in output methods with default parameters</p></li>
+<li><p><strong>mode</strong> – Options: ‘notebook’ or ‘script’ - some of outputs need to change some behaviors,
+depending on the working environment</p></li>
+<li><p><strong>**kwargs</strong> – key-arguments which are passed to MainLogger constructor</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.PlotLosses.draw" title="Link to this definition"></a></dt>
+<dd><p>Send method substitute from old livelossplot api</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.reset_outputs">
+<span class="sig-name descname"><span class="pre">reset_outputs</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.reset_outputs" title="Link to this definition"></a></dt>
+<dd><p>Resets all outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.send">
+<span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.PlotLosses.send" title="Link to this definition"></a></dt>
+<dd><p>Method will send logs to every output class</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_bokeh">
+<span class="sig-name descname"><span class="pre">to_bokeh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_bokeh" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.BokehPlot output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for BokehPlot</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_extrema_printer">
+<span class="sig-name descname"><span class="pre">to_extrema_printer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_extrema_printer" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.ExtremaPrinter output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for ExtremaPrinter</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_matplotlib">
+<span class="sig-name descname"><span class="pre">to_matplotlib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_matplotlib" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.MatplotlibPlot output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for MatplotlibPlot</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_neptune">
+<span class="sig-name descname"><span class="pre">to_neptune</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_neptune" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.NeptuneLogger output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for NeptuneLogger</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_tensorboard">
+<span class="sig-name descname"><span class="pre">to_tensorboard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_tensorboard" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.TensorboardLogger output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for TensorboardLogger</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.to_tensorboard_tf">
+<span class="sig-name descname"><span class="pre">to_tensorboard_tf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#image_generate_model.PlotLosses" title="livelossplot.plot_losses.PlotLosses"><span class="pre">PlotLosses</span></a></span></span><a class="headerlink" href="#image_generate_model.PlotLosses.to_tensorboard_tf" title="Link to this definition"></a></dt>
+<dd><p>Appends outputs.TensorboardTFLogger output, with specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**kwargs</strong> – keyword arguments for TensorboardTFLogger</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plotlosses object (so it works for chaining)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.PlotLosses.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.PlotLosses.update" title="Link to this definition"></a></dt>
+<dd><p>update logs with arguments that will be passed to main logger</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.StepLR">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">StepLR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'deprecated'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.StepLR" title="Link to this definition"></a></dt>
+<dd><p>Decays the learning rate of each parameter group by gamma every
+step_size epochs. Notice that such decay can happen simultaneously with
+other changes to the learning rate from outside this scheduler. When
+last_epoch=-1, sets initial lr as lr.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optimizer</strong> (<em>Optimizer</em>) – Wrapped optimizer.</p></li>
+<li><p><strong>step_size</strong> (<em>int</em>) – Period of learning rate decay.</p></li>
+<li><p><strong>gamma</strong> (<em>float</em>) – Multiplicative factor of learning rate decay.
+Default: 0.1.</p></li>
+<li><p><strong>last_epoch</strong> (<em>int</em>) – The index of last epoch. Default: -1.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em> | </em><em>str</em>) – <p>If <code class="docutils literal notranslate"><span class="pre">True</span></code>, prints a message to stdout for
+each update. Default: <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 2.2: </span><code class="docutils literal notranslate"><span class="pre">verbose</span></code> is deprecated. Please use <code class="docutils literal notranslate"><span class="pre">get_last_lr()</span></code> to access the
+learning rate.</p>
+</div>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># xdoctest: +SKIP</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Assuming optimizer uses lr = 0.05 for all groups</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.05     if epoch &lt; 30</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.005    if 30 &lt;= epoch &lt; 60</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># lr = 0.0005   if 60 &lt;= epoch &lt; 90</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">train</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">validate</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="image_generate_model.WeightedMSELoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">WeightedMSELoss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_increase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.WeightedMSELoss" title="Link to this definition"></a></dt>
+<dd><p>Custom weighted mean squared error loss that
+penalizes larger errors more heavily.</p>
+<p>The loss is calculated by weighting the squared difference between
+the input and the target.
+Larger differences are given more weight,
+which is controlled by the <cite>weight_increase</cite> parameter.</p>
+<section id="id4">
+<h2>Attributes:<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>weight_increase (float): A scaling factor that determines</dt><dd><p>how much larger errors are penalized.
+A higher value increases the penalty on
+larger errors.</p>
+</dd>
+</dl>
+</section>
+<section id="methods">
+<h2>Methods:<a class="headerlink" href="#methods" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>forward(input, target): Computes the weighted mean squared error</dt><dd><p>between input and target.</p>
+</dd>
+</dl>
+</section>
+<section id="example">
+<h2>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">criterion</span> <span class="o">=</span> <span class="n">WeightedMSELoss</span><span class="p">(</span><span class="n">weight_increase</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">input</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Initializes the WeightedMSELoss class with a specified weight
+increase for larger errors.</p>
+</section>
+<section id="id5">
+<h2>Parameters:<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
+<p>weight_increase (float): A factor to control the weighting of
+larger errors. Defaults to 1.0.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="image_generate_model.WeightedMSELoss.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.WeightedMSELoss.forward" title="Link to this definition"></a></dt>
+<dd><p>Compute the weighted mean squared error loss.</p>
+<section id="id6">
+<h3>Parameters:<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>input (Tensor): The predicted values.
+target (Tensor): The ground truth values.</p>
+</section>
+<section id="id7">
+<h3>Returns:<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<p>Tensor: The computed weighted mean squared error loss.</p>
+</section>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="image_generate_model.train">
+<span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">device(type='cpu')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_losses</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(3,</span> <span class="pre">366,</span> <span class="pre">366,</span> <span class="pre">1)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.train" title="Link to this definition"></a></dt>
+<dd><p>Runs the training process for the specified number of epochs.</p>
+<p>Each epoch involves training the model with data provided
+by the dataloader,calculating loss,
+and updating the model parameters.</p>
+<p>Optionally, it can plot the training loss after each epoch.</p>
+<section id="id8">
+<h2>Parameters:<a class="headerlink" href="#id8" title="Link to this heading"></a></h2>
+<p>model (nn.Module): The neural network model to be trained.
+dataloader (DataLoader): Provides batches of data for training.
+criterion (function): Loss function to measure model performance.
+optimizer (Optimizer): Algorithm to update model’s weights.
+epochs (int): Number of epochs to train the model.
+device (torch.device): The device to run the training on (CPU or GPU).
+plot_losses (bool): Flag to turn on live plotting of losses.</p>
+</section>
+<section id="prints">
+<h2>Prints:<a class="headerlink" href="#prints" title="Link to this heading"></a></h2>
+<p>Epoch number and the corresponding average loss.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="image_generate_model.train_epoch">
+<span class="sig-prename descclassname"><span class="pre">image_generate_model.</span></span><span class="sig-name descname"><span class="pre">train_epoch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataloader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#image_generate_model.train_epoch" title="Link to this definition"></a></dt>
+<dd><p>Conducts a single epoch of training on the given model.</p>
+<p>Processes batches from the dataloader, performs forward and
+backward passes, and updates model weights.</p>
+<section id="id9">
+<h2>Parameters:<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<p>model (nn.Module): The neural network model to be trained.
+dataloader (DataLoader): Provides batches of data for training.
+criterion (function): Loss function to measure model performance.
+optimizer (Optimizer): Algorithm to update model’s weights.
+device (torch.device): The device to run the training on (CPU or GPU).
+prediction_shape(int): images we can produce</p>
+</section>
+<section id="id10">
+<h2>Returns:<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>float: The average loss over the epoch.</p>
+</section>
+</dd></dl>
+
+</section>
+<section id="wind-prediction-function-api">
+<h1>Wind Prediction Function API<a class="headerlink" href="#wind-prediction-function-api" title="Link to this heading"></a></h1>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
